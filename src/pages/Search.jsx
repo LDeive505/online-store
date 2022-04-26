@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Sidebar from '../components/Sidebar';
 
 export default class Search extends Component {
   render() {
@@ -14,7 +15,9 @@ export default class Search extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </label>
-
+        <div className="sidebar">
+          <Sidebar />
+        </div>
       </div>
     );
   }
