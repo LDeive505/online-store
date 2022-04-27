@@ -17,6 +17,7 @@ export default class Sidebar extends Component {
     const data = await getCategories();
     this.setState({ categories: data });
   }
+  // usando id como valor de key
 
   render() {
     const { categories } = this.state;
