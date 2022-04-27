@@ -15,18 +15,21 @@ export default class Sidebar extends Component {
 
   getCategoriesFromSidebar = async () => {
     const data = await getCategories();
-    const categories = data.map((d) => d.name);
-    this.setState({ categories });
+    this.setState({ categories: data });
   }
 
   render() {
-    this.getCategoriesFromSidebar();
     const { categories } = this.state;
-    console.log(categories);
     return (
-      <div>
-        {}
-      </div>
+      <ul>
+        {categories.map((ctg) => (
+          <li key={ ctg.id }>
+            <button type="button" data-testid="category">
+              {ctg.name}
+            </button>
+          </li>
+        ))}
+      </ul>
     );
   }
 }
