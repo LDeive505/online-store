@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
 
 export default class Search extends Component {
   render() {
@@ -21,7 +22,9 @@ export default class Search extends Component {
             Carrinho de compras
           </Link>
         </label>
-
+        <div className="sidebar">
+          <Sidebar />
+        </div>
       </div>
     );
   }
