@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 export default class Sidebar extends Component {
@@ -17,15 +18,20 @@ export default class Sidebar extends Component {
     const data = await getCategories();
     this.setState({ categories: data });
   }
-  // usando id como valor de key
 
   render() {
+    const { clickHandle } = this.props;
     const { categories } = this.state;
     return (
       <ul>
         {categories.map((ctg) => (
           <li key={ ctg.id }>
-            <button type="button" data-testid="category">
+            <button
+              id={ ctg.id }
+              type="button"
+              onClick={ clickHandle }
+              data-testid="category"
+            >
               {ctg.name}
             </button>
           </li>
@@ -34,3 +40,7 @@ export default class Sidebar extends Component {
     );
   }
 }
+
+Sidebar.propTypes = {
+  clickHandle: PropTypes.func.isRequired,
+};
