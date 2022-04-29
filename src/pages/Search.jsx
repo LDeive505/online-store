@@ -29,6 +29,10 @@ export default class Search extends Component {
     this.setState({ products: resultCategory });
   }
 
+  /* handleCart = ({ target }) => {
+    console.log(target);
+  } */
+
   render() {
     const { search, products } = this.state;
     return (
