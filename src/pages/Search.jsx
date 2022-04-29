@@ -7,11 +7,17 @@ import { getProducts, getProductsFromCategory } from '../services/api';
 export default class Search extends Component {
   constructor() {
     super();
+
     this.state = {
       search: '',
       products: [],
+      cart: [],
     };
   }
+
+  /*  componentDidUpdate(prevProps, prevState) {
+    console.log("componentDidUpdate", this.state);
+  } */
 
   handleInputChange = ({ target }) => {
     const { value, name } = target;
@@ -29,12 +35,17 @@ export default class Search extends Component {
     this.setState({ products: resultCategory });
   }
 
-  /* handleCart = ({ target }) => {
-    console.log(target);
-  } */
+  handleCart = ({ target }) => {
+    // console.log(target);
+    this.setState((prevState) => ({
+      cart: [...prevState.cart, target.value],
+    }));
+    // console.log(this.state.cart);
+  };
 
   render() {
-    const { search, products } = this.state;
+    const { search, products, cart } = this.state;
+
     return (
       <div>
         <label htmlFor="home-initial-message">
@@ -58,11 +69,19 @@ export default class Search extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
           {products.map((product) => (
-            <Product product={ product } key={ product.id } />
+            <Product
+              product={ product }
+              key={ product.id }
+              handleCart={ this.handleCart }
+            />
           ))}
-          <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+          <Link
+            to={ { pathname: '/ShoppingCart', state: { cart, products } } }
+            data-testid="shopping-cart-button"
+          >
             Carrinho de compras
           </Link>
+
         </label>
         <div className="sidebar">
           <Sidebar clickHandle={ this.getProductsFromAPI } />

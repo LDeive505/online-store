@@ -5,41 +5,9 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 // Linha 17 - ultilizando uma forma de passar dados atraves do componente 'Link' para ser usado no componente que será
 // renderizado quando o link for clicado. fonte: https://www.youtube.com/watch?v=nmbX2QL7ZJc
 export default class Product extends Component {
-  constructor() {
-    super();
-
-    // this.handleCart = this.handleCart.bind(this);
-
-    this.state = {
-      cart: [],
-    };
-  }
-
-  /*  this.setState(prevState =>{
-      return{
-           ...prevState,
-           counter : prevState.counter + 1
-      }
-   }) */
-
-  /* Increment = () => {
-    this.setState((prevState) => ({
-      options: prevState.count + 1)
-    })); */
-  // pega o estado anterior, faz spread do array, e adiciona o targe.value do botão clicado;
-
   render() {
-    const { product } = this.props;
-    const { thumbnail, title, price } = product;
-
-    this.handleCart = ({ target }) => {
-      const innerProduct = target.parentNode.firstChild.innerText;
-      console.log(innerProduct);
-      this.setState((prevState) => ({
-        cart: [...prevState.cart, innerProduct],
-      }));
-      console.log(this.state);
-    };
+    const { product, handleCart } = this.props;
+    const { thumbnail, title, price, id } = product;
 
     return (
       <div data-testid="product">
@@ -50,8 +18,8 @@ export default class Product extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ this.handleCart }
-          // value={ id }
+          onClick={ handleCart }
+          value={ id }
         >
           adicionar ao carrinho
         </button>
@@ -73,4 +41,5 @@ Product.propTypes = {
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
+  handleCart: PropTypes.func.isRequired,
 };
