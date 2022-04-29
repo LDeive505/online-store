@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
+// Linha 17 - ultilizando uma forma de passar dados atraves do componente 'Link' para ser usado no componente que será
+// renderizado quando o link for clicado. fonte: https://www.youtube.com/watch?v=nmbX2QL7ZJc
 export default class Product extends Component {
   constructor() {
     super();
@@ -12,23 +15,22 @@ export default class Product extends Component {
     };
   }
 
-   /*  this.setState(prevState =>{
+  /*  this.setState(prevState =>{
       return{
            ...prevState,
            counter : prevState.counter + 1
       }
    }) */
 
-    /* Increment = () => {
+  /* Increment = () => {
     this.setState((prevState) => ({
       options: prevState.count + 1)
     })); */
-    // pega o estado anterior, faz spread do array, e adiciona o targe.value do botão clicado;
-  
+  // pega o estado anterior, faz spread do array, e adiciona o targe.value do botão clicado;
 
   render() {
     const { product } = this.props;
-    const { thumbnail, title, price, id } = product;
+    const { thumbnail, title, price } = product;
 
     this.handleCart = ({ target }) => {
       const innerProduct = target.parentNode.firstChild.innerText;
@@ -53,6 +55,12 @@ export default class Product extends Component {
         >
           adicionar ao carrinho
         </button>
+        <Link
+          to={ { pathname: '/productDetails', state: { product } } }
+          data-testid="product-detail-link"
+        >
+          Ver Detalhes...
+        </Link>
       </div>
     );
   }
