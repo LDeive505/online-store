@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Product from '../components/Product';
 import Sidebar from '../components/Sidebar';
-import { getProducts, getProductsFromCategory } from '../services/api';
+import { getProducts, getProductsFromCategory, getProductFromId } from '../services/api';
 
 export default class Search extends Component {
   constructor() {
@@ -14,10 +14,6 @@ export default class Search extends Component {
       cart: [],
     };
   }
-
-  /*  componentDidUpdate(prevProps, prevState) {
-    console.log("componentDidUpdate", this.state);
-  } */
 
   handleInputChange = ({ target }) => {
     const { value, name } = target;
@@ -35,17 +31,16 @@ export default class Search extends Component {
     this.setState({ products: resultCategory });
   }
 
-  handleCart = ({ target }) => {
-    // console.log(target);
+  handleCart = async ({ target: { value } }) => {
+    const data = await getProductFromId(value);
+    const cartProduct = { ...data, quantity: 1 };
     this.setState((prevState) => ({
-      cart: [...prevState.cart, target.value],
+      cart: [...prevState.cart, cartProduct],
     }));
-    // console.log(this.state.cart);
   };
 
   render() {
     const { search, products, cart } = this.state;
-
     return (
       <div>
         <label htmlFor="home-initial-message">
@@ -76,7 +71,7 @@ export default class Search extends Component {
             />
           ))}
           <Link
-            to={ { pathname: '/ShoppingCart', state: { cart, products } } }
+            to={ { pathname: '/ShoppingCart', state: { cart } } }
             data-testid="shopping-cart-button"
           >
             Carrinho de compras
