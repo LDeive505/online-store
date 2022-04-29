@@ -14,7 +14,6 @@ export default class Product extends Component {
         <h3>{title}</h3>
         <img src={ thumbnail } alt={ title } />
         <span>{price}</span>
-        {/* {console.log(product)} */}
         <button
           type="button"
           data-testid="product-add-to-cart"
