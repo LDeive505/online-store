@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export default class ProductDetails extends Component {
   render() {
     const { location: { state: { product } } } = this.props;
-    const { thumbnail, title, price, discounts, condition } = product;
+    const { thumbnail, title, price, discounts, condition, id } = product;
     return (
       <div>
         <h3 data-testid="product-detail-name">
@@ -27,6 +27,14 @@ export default class ProductDetails extends Component {
               Descontos:
               {discounts}
             </p>)}
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          value={ id }
+          /* onClick */
+        >
+          adicionar ao carrinho
+        </button>
         <Link to="/ShoppinCart">
           Carrinho de Compras
         </Link>

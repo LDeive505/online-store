@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Product from '../components/Product';
 import Sidebar from '../components/Sidebar';
-import { getProducts, getProductsFromCategory, getProductFromId } from '../services/api';
+import { getProducts, getProductsFromCategory } from '../services/api';
 
 export default class Search extends Component {
   constructor() {
@@ -31,9 +31,10 @@ export default class Search extends Component {
     this.setState({ products: resultCategory });
   }
 
-  handleCart = async ({ target: { value } }) => {
-    const data = await getProductFromId(value);
-    const cartProduct = { ...data, quantity: 1 };
+  handleCart = ({ target: { value } }) => {
+    const { products } = this.state;
+    const prod = products.find((product) => product.id === value);
+    const cartProduct = { ...prod, quantity: 1 };
     this.setState((prevState) => ({
       cart: [...prevState.cart, cartProduct],
     }));
