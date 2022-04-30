@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import Sidebar from '../components/Sidebar';
 import { getProducts, getProductsFromCategory } from '../services/api';
@@ -11,7 +12,6 @@ export default class Search extends Component {
     this.state = {
       search: '',
       products: [],
-      cart: [],
     };
   }
 
@@ -31,17 +31,9 @@ export default class Search extends Component {
     this.setState({ products: resultCategory });
   }
 
-  handleCart = ({ target: { value } }) => {
-    const { products } = this.state;
-    const prod = products.find((product) => product.id === value);
-    const cartProduct = { ...prod, quantity: 1 };
-    this.setState((prevState) => ({
-      cart: [...prevState.cart, cartProduct],
-    }));
-  };
-
   render() {
-    const { search, products, cart } = this.state;
+    const { search, products } = this.state;
+    const { handleCart } = this.props;
     return (
       <div>
         <label htmlFor="home-initial-message">
@@ -68,13 +60,10 @@ export default class Search extends Component {
             <Product
               product={ product }
               key={ product.id }
-              handleCart={ this.handleCart }
+              handleCart={ handleCart }
             />
           ))}
-          <Link
-            to={ { pathname: '/ShoppingCart', state: { cart } } }
-            data-testid="shopping-cart-button"
-          >
+          <Link to="/ShoppingCart" data-testid="shopping-cart-button">
             Carrinho de compras
           </Link>
 
@@ -86,3 +75,7 @@ export default class Search extends Component {
     );
   }
 }
+
+Search.propTypes = {
+  handleCart: PropTypes.func.isRequired,
+};

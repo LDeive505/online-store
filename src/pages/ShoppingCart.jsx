@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class ShoppingCart extends Component {
   render() {
-    const { location: { state: { cart } } } = this.props;
+    const { cart } = this.props;
     return (
       <div>
         { (cart.length === 0)
@@ -24,5 +24,5 @@ export default class ShoppingCart extends Component {
 }
 
 ShoppingCart.propTypes = {
-  location: PropTypes.objectOf(PropTypes.shape).isRequired,
+  cart: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };

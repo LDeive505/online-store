@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 export default class ProductDetails extends Component {
   render() {
     const { location: { state: { product } } } = this.props;
-    const { thumbnail, title, price, discounts, condition, id } = product;
+    const { handleCart } = this.props;
+    const { thumbnail, title, price, discounts, condition } = product;
     return (
       <div>
         <h3 data-testid="product-detail-name">
@@ -30,12 +31,11 @@ export default class ProductDetails extends Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          value={ id }
-          /* onClick */
+          onClick={ () => handleCart(product) }
         >
-          adicionar ao carrinho
+          Adicionar ao carrinho
         </button>
-        <Link to="/ShoppinCart">
+        <Link to="/shoppingCart" data-testid="shopping-cart-button">
           Carrinho de Compras
         </Link>
       </div>
@@ -45,4 +45,5 @@ export default class ProductDetails extends Component {
 
 ProductDetails.propTypes = {
   location: PropTypes.objectOf(PropTypes.shape).isRequired,
+  handleCart: PropTypes.func.isRequired,
 };

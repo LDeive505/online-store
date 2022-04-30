@@ -17,13 +17,12 @@ export default class Product extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ handleCart }
-          value={ id }
+          onClick={ () => handleCart(product) }
         >
           adicionar ao carrinho
         </button>
         <Link
-          to={ { pathname: '/productDetails', state: { product, handleCart } } }
+          to={ { pathname: `productDetails/${id}`, state: { product } } }
           data-testid="product-detail-link"
         >
           Ver Detalhes...
