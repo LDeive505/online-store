@@ -22,7 +22,7 @@ export default class Product extends Component {
           adicionar ao carrinho
         </button>
         <Link
-          to={ { pathname: `productDetails/${id}` } }
+          to={ { pathname: `productDetails/${id}`, state: { product } } }
           data-testid="product-detail-link"
         >
           Ver Detalhes...

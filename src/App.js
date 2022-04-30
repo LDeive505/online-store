@@ -51,7 +51,6 @@ export default class App extends React.Component {
                   handleCart={ this.handleCart }
                 />) }
             />
-            <Route component={ NotFound } />
           </Switch>
         </BrowserRouter>
       </div>

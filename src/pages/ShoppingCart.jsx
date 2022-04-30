@@ -24,5 +24,5 @@ export default class ShoppingCart extends Component {
 }
 
 ShoppingCart.propTypes = {
-  cart: PropTypes.objectOf(PropTypes.shape).isRequired,
+  cart: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
