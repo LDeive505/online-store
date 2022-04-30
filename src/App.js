@@ -20,6 +20,17 @@ export default class App extends React.Component {
     }));
   };
 
+  incresaOrDecreaseProductQuantity = (id, add) => {
+    const { cart } = this.state;
+    cart.forEach((prod) => {
+      if (prod.id === id) {
+        if (add) prod.quantity += 1;
+        else if (prod.quantity > 0) prod.quantity -= 1;
+      }
+    });
+    this.setState({ cart });
+  }
+
   render() {
     const { cart } = this.state;
     return (
@@ -41,6 +52,7 @@ export default class App extends React.Component {
                 <ShoppingCart
                   { ...props }
                   cart={ cart }
+                  handleQuantity={ this.incresaOrDecreaseProductQuantity }
                 />) }
             />
             <Route
