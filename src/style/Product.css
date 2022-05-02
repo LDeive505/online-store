@@ -1,0 +1,35 @@
+.product {
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+  justify-content: space-between;
+  margin: 5px;
+  width: 200px;
+}
+
+.prodButton {
+  cursor: pointer;
+}
+
+img {
+  height: 150px;
+  object-fit: contain;
+  width: 150px;
+}
+
+h3 {
+  font-size: 12px;
+  text-align: center;
+}
+
+span {
+  color: red;
+}
+
+a {
+  color: blue;
+  text-decoration-line: none;
+}
