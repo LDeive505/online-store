@@ -5,7 +5,6 @@ import Evaluations from './Evaluations';
 
 export default class ProductDetails extends Component {
   render() {
-    const counterToFive = ['1', '2', '3', '4', '5'];
     const { location: { state: { product } } } = this.props;
     const { handleCart } = this.props;
     const { thumbnail, title, price, discounts, condition } = product;
