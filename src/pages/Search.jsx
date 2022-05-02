@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Product from '../components/Product';
 import Sidebar from '../components/Sidebar';
 import { getProducts, getProductsFromCategory } from '../services/api';
+import '../style/Search.css';
 
 export default class Search extends Component {
   constructor() {
@@ -35,41 +36,46 @@ export default class Search extends Component {
     const { search, products } = this.state;
     const { handleCart } = this.props;
     return (
-      <div>
-        <label htmlFor="home-initial-message">
-          <input
-            placeholder="Digite aqui"
-            type="text"
-            id="home-initial-message"
-            name="search"
-            data-testid="query-input"
-            value={ search }
-            onChange={ this.handleInputChange }
-          />
-          <button
-            type="button"
-            data-testid="query-button"
-            onClick={ this.searchProducts }
-          >
-            Pesquisar
-          </button>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          {products.map((product) => (
-            <Product
-              product={ product }
-              key={ product.id }
-              handleCart={ handleCart }
-            />
-          ))}
-          <Link to="/ShoppingCart" data-testid="shopping-cart-button">
-            Carrinho de compras
-          </Link>
-
-        </label>
+      <div className="container">
         <div className="sidebar">
           <Sidebar clickHandle={ this.getProductsFromAPI } />
+        </div>
+        <div className="right">
+          <div className="inputSearch">
+            <label htmlFor="home-initial-message">
+              <input
+                placeholder="Digite aqui"
+                type="text"
+                id="home-initial-message"
+                name="search"
+                data-testid="query-input"
+                value={ search }
+                onChange={ this.handleInputChange }
+              />
+            </label>
+            <button
+              type="button"
+              data-testid="query-button"
+              onClick={ this.searchProducts }
+            >
+              Pesquisar
+            </button>
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+            <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+              Carrinho de compras
+            </Link>
+          </div>
+          <div className="allProducts">
+            {products.map((product) => (
+              <Product
+                product={ product }
+                key={ product.id }
+                handleCart={ handleCart }
+              />
+            ))}
+          </div>
         </div>
       </div>
     );

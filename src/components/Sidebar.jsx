@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
+import '../style/Sidebar.css';
 
 export default class Sidebar extends Component {
   constructor() {
@@ -25,8 +26,9 @@ export default class Sidebar extends Component {
     return (
       <ul>
         {categories.map((ctg) => (
-          <li key={ ctg.id }>
+          <li className="li" key={ ctg.id }>
             <button
+              className="sideButton"
               id={ ctg.id }
               type="button"
               onClick={ clickHandle }

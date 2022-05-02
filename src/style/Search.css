@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  top: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(116, 145, 135, 0);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(116, 145, 135, 0.781);
+  border: 3px solid rgba(116, 145, 135, 0.781);
+  border-radius: 20px;
+}
+
+body {
+  background: rgba(160, 173, 169, 0.7);
+  margin: 0 auto;
+  max-width: 1366px;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  background-color: rgba(116, 145, 135, 0.781);
+  border-radius: 10px;
+  margin: 10px;
+  max-height: 720px;
+  max-width: 310px;
+  min-width: 310px;
+  overflow: auto;
+  padding: 20px;
+  padding-left: 0;
+}
+
+.right {
+  background-color: darkseagreen;
+  border-radius: 10px;
+  margin: 10px;
+  max-height: 740px;
+  overflow: auto;
+  padding: 0 20px 20px;
+  width: 100%;
+}
+
+.inputSearch {
+  background-color: darkseagreen;
+  padding: 20px 0;
+  position: sticky;
+  width: auto;
+}
+
+.allProducts {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input {
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px 10px;
+  width: 80%;
+}
+
+button {
+  background-color: rgb(63, 63, 219);
+  border-radius: 10px;
+  color: whitesmoke;
+  font-weight: 600;
+  margin: 5px;
+  padding: 5px 20px;
+}
+
+p {
+  margin: 10px;
+}
