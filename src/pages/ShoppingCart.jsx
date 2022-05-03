@@ -38,9 +38,16 @@ export default class ShoppingCart extends Component {
                   >
                     -
                   </button>
+                  <Link
+                    to="/Checkout"
+                    data-testid="checkout-products"
+                  >
+                    Finalizar Compra
+                  </Link>
                   <Link to="/">
                     Página inicial
                   </Link>
+
                 </div>
               );
             })}
