@@ -1,10 +1,47 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default class Checkout extends Component {
+  getTotal = () => {
+    const { cart } = this.props;
+    let total = 0;
+    cart.forEach((item) => {
+      total += (item.price * item.quantity);
+    });
+    return total;
+  }
+
   render() {
+    const { cart } = this.props;
     return (
       <div>
-        Checkout
+        <h1>Finalize sua compra!</h1>
+        <section>
+          <h2>Revise seus produtos</h2>
+          { cart.map((item) => (
+            <div key={ item.id }>
+              <img src={ item.thumbnail } alt={ item.title } />
+              <h4>{ item.title }</h4>
+              <h5>
+                Valor unitário R$:
+                { item.price }
+              </h5>
+              <h5>
+                Quantidade:
+                { item.quantity }
+              </h5>
+              <h5>
+                Subtotal R$:
+                { item.price * item.quantity }
+              </h5>
+            </div>
+          )) }
+          <h2>
+            Total R$:
+            { this.getTotal() }
+          </h2>
+        </section>
         <form>
           <label htmlFor="Nome completo">
             Nome completo:
@@ -61,7 +98,43 @@ export default class Checkout extends Component {
             />
           </label>
         </form>
+        <section id="metodo">
+          <h2>Método de Pagamento</h2>
+          <label htmlFor="metodo">
+            Boleto:
+            <input
+              type="radio"
+              name="radio"
+            />
+          </label>
+          <label htmlFor="metodo">
+            Cartão:
+            <input
+              type="radio"
+              name="radio"
+            />
+          </label>
+          <label htmlFor="metodo">
+            Pix:
+            <input
+              type="radio"
+              name="radio"
+            />
+          </label>
+        </section>
+        <Link to="/">
+          Página inicial
+        </Link>
+        <button
+          type="button"
+        >
+          Concluir Compra!!!
+        </button>
       </div>
     );
   }
 }
+
+Checkout.propTypes = {
+  cart: PropTypes.arrayOf(PropTypes.shape).isRequired,
+};

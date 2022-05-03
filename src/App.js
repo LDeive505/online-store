@@ -64,7 +64,14 @@ export default class App extends React.Component {
                   handleCart={ this.handleCart }
                 />) }
             />
-            <Route path="/Checkout" component={ Checkout } />
+            <Route
+              path="/Checkout"
+              render={ (props) => (
+                <Checkout
+                  { ...props }
+                  cart={ cart }
+                />) }
+            />
           </Switch>
         </BrowserRouter>
       </div>
