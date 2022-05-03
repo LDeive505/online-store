@@ -2,12 +2,31 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Evaluations from '../components/Evaluations';
+import { getProductFromId } from '../services/api';
 
 export default class ProductDetails extends Component {
+  constructor() {
+    super();
+    this.state = {
+      product: {},
+    };
+  }
+
+  componentDidMount() {
+    this.getProduct();
+  }
+
+  getProduct = async () => {
+    const { match: { params: { id } } } = this.props;
+    const product = await getProductFromId(id);
+    this.setState({ product });
+  }
+
   render() {
-    const { location: { state: { product } } } = this.props;
+    const { product } = this.state;
     const { handleCart } = this.props;
-    const { thumbnail, title, price, discounts, condition, id } = product;
+    const { thumbnail, title, price, discounts, condition } = product;
+    const { match: { params: { id } } } = this.props;
     return (
       <div>
         <h3 data-testid="product-detail-name">
@@ -39,13 +58,13 @@ export default class ProductDetails extends Component {
         <Link to="/shoppingCart" data-testid="shopping-cart-button">
           Carrinho de Compras
         </Link>
-        <Evaluations id={ id } />
+        <Evaluations productId={ id } />
       </div>
     );
   }
 }
 
 ProductDetails.propTypes = {
-  location: PropTypes.objectOf(PropTypes.shape).isRequired,
+  match: PropTypes.objectOf(PropTypes.shape).isRequired,
   handleCart: PropTypes.func.isRequired,
 };

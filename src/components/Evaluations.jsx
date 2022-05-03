@@ -8,14 +8,16 @@ export default class Evaluations extends Component {
       comentario: '',
       email: '',
       radiobtn: '',
-      savedComents: [],
+      savedComments: [],
     };
   }
 
   componentDidMount() {
-    const { id } = this.props;
-    const local = JSON.parse(localStorage.getItem(id));
-    this.setState({ savedComents: local });
+    const { productId } = this.props;
+    let local = JSON.parse(localStorage.getItem(productId));
+    //  Na montagem do componente, recupero o localStorage para jogá-lo no estado, porém é verificado se o mesmo é 'null se for é atribuido um array vazio para que seja possivel acessar as propriedades dele como um array, evitando erros no método render.
+    if (local === null) local = [];
+    this.setState({ savedComments: local });
   }
 
   handleInputChange = ({ target }) => {
@@ -24,24 +26,26 @@ export default class Evaluations extends Component {
   }
 
   handleSaveButton = () => {
-    const { id } = this.props;
+    const { productId } = this.props;
     const { email, radiobtn, comentario } = this.state;
-    const comentObj = {
-      email,
-      radiobtn,
-      comentario,
-      id,
-    };
-    localStorage.setItem(id, JSON.stringify(comentObj));
-    this.setState((prev) => ({
-      savedComents: [...prev.savedComents, comentObj],
-    }));
+
+    const commentObj = { email, radiobtn, comentario };
+
+    // recupero os comentarios já salvos que foram passados para estado do componente a partir do localStorage e insiro o novo comentario no array de comentários e salvo novamente tanto no estado atual(para ser exibido imediatamente apos o click em 'salvar') e no localStorage com a mesma key(id do produto em questão)
+    const { savedComments } = this.state;
+    savedComments.push(commentObj);
+    this.setState({
+      savedComments,
+      comentario: '',
+      email: '',
+      radiobtn: '',
+    });
+    localStorage.setItem(productId, JSON.stringify(savedComments));
   }
 
   render() {
     const counterToFive = ['1', '2', '3', '4', '5'];
-    const { savedComents } = this.state;
-    const { id } = this.props;
+    const { savedComments, comentario, email } = this.state;
     return (
       <div>
         <form>
@@ -53,6 +57,7 @@ export default class Evaluations extends Component {
                 data-testid="product-detail-email"
                 type="email"
                 name="email"
+                value={ email }
                 onChange={ this.handleInputChange }
               />
             </label>
@@ -81,6 +86,7 @@ export default class Evaluations extends Component {
               <textarea
                 data-testid="product-detail-evaluation"
                 name="comentario"
+                value={ comentario }
                 onChange={ this.handleInputChange }
               />
             </label>
@@ -96,16 +102,13 @@ export default class Evaluations extends Component {
           </span>
         </form>
         {
-          savedComents.length > 0 && (savedComents.map((item) => {
-            if (item.id === id) {
-              return (
-                <div>
-                  <p>{ item.email }</p>
-                  <p>{ item.comentario }</p>
-                  <p>{ item.radiobtn }</p>
-                </div>);
-            } return 0;
-          }))
+          savedComments.length > 0 && (savedComments.map((item, index) => (
+            <div key={ index }>
+              <p>{ item.email }</p>
+              <p>{ item.comentario }</p>
+              <p>{ item.radiobtn }</p>
+            </div>
+          )))
         }
       </div>
     );
@@ -113,5 +116,5 @@ export default class Evaluations extends Component {
 }
 
 Evaluations.propTypes = {
-  id: PropTypes.string.isRequired,
+  productId: PropTypes.string.isRequired,
 };
