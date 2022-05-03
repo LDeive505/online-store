@@ -15,6 +15,7 @@ export default class Evaluations extends Component {
   componentDidMount() {
     const { productId } = this.props;
     let local = JSON.parse(localStorage.getItem(productId));
+
     //  Na montagem do componente, recupero o localStorage para jogá-lo no estado, porém é verificado se o mesmo é 'null se for é atribuido um array vazio para que seja possivel acessar as propriedades dele como um array, evitando erros no método render.
     if (local === null) local = [];
     this.setState({ savedComments: local });
@@ -28,7 +29,6 @@ export default class Evaluations extends Component {
   handleSaveButton = () => {
     const { productId } = this.props;
     const { email, radiobtn, comentario } = this.state;
-
     const commentObj = { email, radiobtn, comentario };
 
     // recupero os comentarios já salvos que foram passados para estado do componente a partir do localStorage e insiro o novo comentario no array de comentários e salvo novamente tanto no estado atual(para ser exibido imediatamente apos o click em 'salvar') e no localStorage com a mesma key(id do produto em questão)
