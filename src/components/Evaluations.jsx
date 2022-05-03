@@ -15,27 +15,33 @@ export default class Evaluations extends Component {
   componentDidMount() {
     const { id } = this.props;
     const local = JSON.parse(localStorage.getItem(id));
-    this.setState({ savedComents: [local] });
-    console.log(local);
+    this.setState({ savedComents: local });
   }
 
   handleInputChange = ({ target }) => {
-    // console.log("rodou");
     const { value, name } = target;
     this.setState({ [name]: value });
-    // console.log(this.state);
   }
 
   handleSaveButton = () => {
     const { id } = this.props;
     const { email, radiobtn, comentario } = this.state;
-    localStorage.setItem(id, JSON.stringify({ email, radiobtn, comentario }));
+    const comentObj = {
+      email,
+      radiobtn,
+      comentario,
+      id,
+    };
+    localStorage.setItem(id, JSON.stringify(comentObj));
+    this.setState((prev) => ({
+      savedComents: [...prev.savedComents, comentObj],
+    }));
   }
-  // localStorage {[text]: "123"} = > {asdasas: '123'}, similar ao setState.
 
   render() {
     const counterToFive = ['1', '2', '3', '4', '5'];
     const { savedComents } = this.state;
+    const { id } = this.props;
     return (
       <div>
         <form>
@@ -88,17 +94,19 @@ export default class Evaluations extends Component {
               Salvar
             </button>
           </span>
-
         </form>
-        { savedComents.length > 0 && savedComents.map((element, key) => (
-          <div
-            key={ key }
-          >
-            <p>{ element.email }</p>
-            <p>{ element.comentario }</p>
-            <p>{ element.radiobtn }</p>
-          </div>))}
-
+        {
+          savedComents.length > 0 && (savedComents.map((item) => {
+            if (item.id === id) {
+              return (
+                <div>
+                  <p>{ item.email }</p>
+                  <p>{ item.comentario }</p>
+                  <p>{ item.radiobtn }</p>
+                </div>);
+            } return 0;
+          }))
+        }
       </div>
     );
   }
