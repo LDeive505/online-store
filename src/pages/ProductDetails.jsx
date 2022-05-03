@@ -26,7 +26,14 @@ export default class ProductDetails extends Component {
   render() {
     const { product } = this.state;
     const { handleCart, totalProducts } = this.props;
-    const { thumbnail, title, price, discounts, condition } = product;
+    const {
+      thumbnail,
+      title,
+      price,
+      discounts,
+      condition,
+    } = product;
+    console.log(product);
     const { match: { params: { id } } } = this.props;
     const total = totalProducts();
     return (
