@@ -8,11 +8,18 @@ import '../style/Product.css';
 export default class Product extends Component {
   render() {
     const { product, handleCart } = this.props;
-    const { thumbnail, title, price, id } = product;
+    const {
+      thumbnail,
+      title,
+      price,
+      id,
+      shipping: { free_shipping: freeShipping },
+    } = product;
 
     return (
       <div className="product" data-testid="product">
         <img src={ thumbnail } alt={ title } />
+        { freeShipping && <span data-testid="free-shipping">FRETE GRÁTIS!!!</span> }
         <h3>{title}</h3>
         <span>{ `R$ ${price}` }</span>
         <button
@@ -24,7 +31,6 @@ export default class Product extends Component {
           Adicionar ao carrinho
         </button>
         <Link
-        // antes eu passava o objeto do produto para product details por aqui
           to={ { pathname: `productDetails/${id}` } }
           data-testid="product-detail-link"
         >
@@ -41,6 +47,7 @@ Product.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
+    shipping: PropTypes.objectOf(PropTypes.shape),
   }).isRequired,
   handleCart: PropTypes.func.isRequired,
 };
