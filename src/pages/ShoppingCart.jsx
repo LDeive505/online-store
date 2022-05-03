@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 export default class ShoppingCart extends Component {
   render() {
     const { cart, handleQuantity } = this.props;
+    let totalCart = 0;
+    cart.forEach((item) => { totalCart += item.quantity; });
     return (
       <div>
         {cart.length === 0 ? (
@@ -38,12 +40,14 @@ export default class ShoppingCart extends Component {
                   >
                     -
                   </button>
-                  <Link to="/">
-                    Página inicial
-                  </Link>
                 </div>
               );
             })}
+            <span data-testid="shopping-cart-size">{totalCart}</span>
+
+            <Link to="/">
+              Página inicial
+            </Link>
           </div>
         )}
       </div>

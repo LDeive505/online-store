@@ -5,8 +5,9 @@ import Evaluations from '../components/Evaluations';
 import { getProductFromId } from '../services/api';
 
 export default class ProductDetails extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       product: {},
     };
@@ -24,9 +25,11 @@ export default class ProductDetails extends Component {
 
   render() {
     const { product } = this.state;
-    const { handleCart } = this.props;
+    const { handleCart, totalProducts } = this.props;
     const { thumbnail, title, price, discounts, condition } = product;
     const { match: { params: { id } } } = this.props;
+    const total = totalProducts();
+    console.log(total);
     return (
       <div>
         <h3 data-testid="product-detail-name">
@@ -56,7 +59,8 @@ export default class ProductDetails extends Component {
           Adicionar ao carrinho
         </button>
         <Link to="/shoppingCart" data-testid="shopping-cart-button">
-          Carrinho de Compras
+          Carrinho de compras
+          <span data-testid="shopping-cart-size">{total}</span>
         </Link>
         <Evaluations productId={ id } />
       </div>
@@ -67,4 +71,5 @@ export default class ProductDetails extends Component {
 ProductDetails.propTypes = {
   match: PropTypes.objectOf(PropTypes.shape).isRequired,
   handleCart: PropTypes.func.isRequired,
+  totalProducts: PropTypes.func.isRequired,
 };
