@@ -24,7 +24,8 @@ export default class Product extends Component {
           Adicionar ao carrinho
         </button>
         <Link
-          to={ { pathname: `productDetails/${id}`, state: { product } } }
+        // antes eu passava o objeto do produto para product details por aqui
+          to={ { pathname: `productDetails/${id}` } }
           data-testid="product-detail-link"
         >
           Ver Detalhes...
