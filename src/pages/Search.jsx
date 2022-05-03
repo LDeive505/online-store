@@ -34,7 +34,7 @@ export default class Search extends Component {
 
   render() {
     const { search, products } = this.state;
-    const { handleCart } = this.props;
+    const { handleCart, totalProducts } = this.props;
     return (
       <div className="container">
         <div className="sidebar">
@@ -64,7 +64,8 @@ export default class Search extends Component {
               Digite algum termo de pesquisa ou escolha uma categoria.
             </p>
             <Link to="/ShoppingCart" data-testid="shopping-cart-button">
-              Carrinho de compras
+              Carrinho de compras:
+              <span data-testid="shopping-cart-size">{totalProducts}</span>
             </Link>
           </div>
           <div className="allProducts">
@@ -84,4 +85,5 @@ export default class Search extends Component {
 
 Search.propTypes = {
   handleCart: PropTypes.func.isRequired,
+  totalProducts: PropTypes.number.isRequired,
 };
