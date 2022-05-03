@@ -40,11 +40,16 @@ export default class ShoppingCart extends Component {
                   >
                     -
                   </button>
+                  <Link
+                    to="/Checkout"
+                    data-testid="checkout-products"
+                  >
+                    Finalizar Compra
+                  </Link>
                 </div>
               );
             })}
             <span data-testid="shopping-cart-size">{totalCart}</span>
-
             <Link to="/">
               Página inicial
             </Link>

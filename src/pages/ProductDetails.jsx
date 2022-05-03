@@ -29,7 +29,6 @@ export default class ProductDetails extends Component {
     const { thumbnail, title, price, discounts, condition } = product;
     const { match: { params: { id } } } = this.props;
     const total = totalProducts();
-    console.log(total);
     return (
       <div>
         <h3 data-testid="product-detail-name">

@@ -16,7 +16,7 @@
   font-weight: 700;
 }
 
-.sideButton:active, :focus, :active:focus {
+.sideButton:active:focus {
   background-color: darkseagreen;
   font-weight: 700;
 }
