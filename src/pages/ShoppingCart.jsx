@@ -30,6 +30,7 @@ export default class ShoppingCart extends Component {
                     type="button"
                     data-testid="product-increase-quantity"
                     onClick={ () => handleQuantity(id, true) }
+                    disabled={ item.available_quantity <= quantity }
                   >
                     +
                   </button>
