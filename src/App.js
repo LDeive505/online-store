@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Search from './pages/Search';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
 
 export default class App extends React.Component {
   constructor() {
@@ -61,6 +62,14 @@ export default class App extends React.Component {
                 <ProductDetails
                   { ...props }
                   handleCart={ this.handleCart }
+                />) }
+            />
+            <Route
+              path="/Checkout"
+              render={ (props) => (
+                <Checkout
+                  { ...props }
+                  cart={ cart }
                 />) }
             />
           </Switch>
